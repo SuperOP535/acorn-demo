@@ -1,0 +1,48 @@
+<script src="https://cdn.jsdelivr.net/npm/acorn@6.0.5/dist/acorn.min.js"></script>
+<style>
+    /* Dark theme */
+    body { background: #36454F; text-align: center; }
+
+    /* Prevent breaking/wrapping */
+    textarea {
+        white-space: pre;
+        height: 40em;
+        width: 49%;
+        margin: 0.5%;
+        border-radius: 4px;
+    }
+    
+    /* Center textarea placeholder */
+    textarea::placeholder {
+        font-size: 2em;
+        line-height: 20em;
+        text-align: center;
+    }
+    
+    /* To be honest default width is way too much */
+    input[type=number] {
+        width: 5em;
+    }
+    
+    button, input {
+        border-radius: 4px;
+        font-size: 2em;
+        margin: 1px;
+    }
+</style>
+
+<textarea id="code" placeholder="Code"></textarea><textarea id="output" placeholder="Acorn output (v6.0.5)" disabled></textarea><br><button onclick="parse();">Parse</button> <input id="start" type="number" placeholder="Start"><input id="end" type="number" placeholder="End"><button onclick="slice();">Slice</button>
+
+<script>
+    function parse() {
+        try {
+            document.getElementById('output').value = JSON.stringify(acorn.parse(document.getElementById('code').value), null, 4);
+        } catch(e) {
+            document.getElementById('output').value = e;
+        }
+    }
+    
+    function slice() {
+        document.getElementById('output').value = document.getElementById('code').value.slice(+document.getElementById('start').value, +document.getElementById('end').value)
+    }
+</script>
