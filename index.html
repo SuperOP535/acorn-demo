@@ -31,18 +31,18 @@
     }
 </style>
 
-<textarea id="code" placeholder="Code"></textarea><textarea id="output" placeholder="Acorn output (v6.0.5)" disabled></textarea><br><button onclick="parse();">Parse</button> <input id="start" type="number" placeholder="Start"><input id="end" type="number" placeholder="End"><button onclick="slice();">Slice</button>
+<textarea id="code" placeholder="Code"></textarea><textarea id="output" placeholder="Acorn output (v6.0.5)" readonly></textarea><br><button onclick="parse();">Parse</button> <input id="start" type="number" placeholder="Start"><input id="end" type="number" placeholder="End"><button onclick="slice();">Slice</button>
 
 <script>
     function parse() {
         try {
-            document.getElementById('output').value = JSON.stringify(acorn.parse(document.getElementById('code').value), null, 4);
+            document.getElementById('output').value = JSON.stringify(acorn.parse(document.getElementById('code').value), null, '\t');
         } catch(e) {
             document.getElementById('output').value = e;
         }
     }
     
     function slice() {
-        document.getElementById('output').value = document.getElementById('code').value.slice(+document.getElementById('start').value, +document.getElementById('end').value)
+        document.getElementById('output').value = document.getElementById('code').value.slice(+document.getElementById('start').value, +document.getElementById('end').value);
     }
 </script>
